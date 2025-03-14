@@ -1,5 +1,5 @@
 
-																Session - 48
+																Session - 48   (KUBERNETES)
 															======================
 															
 															
@@ -7,19 +7,23 @@
 															
 															
 				
---> docker ekkada fail avutundhantey docker containers laaga run chestunnapudu  no. of containers perigey koddi aa containers ni manage cheyadam docker ki kastam ayipotondhi autoscaling kaani, traffic perigey koddi container ni automatic ga increase cheyadamu , load balancing 4, 5 containers vunnayanukondi vaatiki load balancer vundaali actually adhi docker cheyalekapotondhi and volume management adhi docker host lo ney vundhi kaabatti , host crash ayindhantey mottam volume kooda potundhi networking kooda konchem multiple docker host lu pettukunnapudu vaati madyalo networking create cheyadam konchem first thing every thing manamey chesukovali so ee complexities anninti valla manam , oka archestrator kaavali archestrator anedhi kubernetes kosam aney kaadhu meeku manage cheyalsina server ekkuva vunnapudu khachitam ga archestrator anedhi okati avasaram avutundhi like master server architecture laaga like master node laaga
+--> docker ekkada fail avutundhantey docker containers laaga run chestunnapudu  no. of containers perigey koddi aa containers ni manage cheyadam docker ki 
+	kastam ayipotondhi autoscaling kaani, traffic perigey koddi container ni automatic ga increase cheyadamu , load balancing 4, 5 containers vunnayanukondi vaatiki load balancer vundaali actually adhi docker cheyalekapotondhi and volume management adhi docker, host(server linux) lo ney vundhi kaabatti , host crash ayindhantey mottam volume kooda potundhi networking kooda konchem potondhi multiple docker host lu pettukunnapudu vaati madyalo networking create cheyadam konchem first thing every thing manamey chesukovali so ee complexities anninti valla manam , oka archestrator kaavali archestrator anedhi kubernetes kosam aney kaadhu meeku manage cheyalsina servers ekkuva vunnapudu khachitam ga archestrator anedhi okati avasaram avutundhi like master server architecture laaga like master node laaga
 
 1. build the image --> use docker
 2. run the image as container --> use kubernetes
 
 so veetanninti kosam manaki kubernetes select chesukunnam
 				
-eksctl --> AWS command line tool to create and manage EKS cluster ( eksctl is used for cretate update delete the eks cluster only)
---> docker container ni run cheyadaaniki suit avvaledhu kaabatti kubernetes ki vochaam so ee kubernetes ki kooda manam inform cheyaali kadha docker images ni elaa run cheyaali anedhi, so kubernetes ki kooda inform cheyaali that is again just docker compose.yaml file laaga idhi manifest.yaml file 
+eksctl -->IDHI OKA  AWS command line tool to create and manage EKS cluster ( eksctl is used for cretate update delete the eks cluster only)
+
+--> docker container ni run cheyadaaniki suit avvaledhu kaabatti kubernetes ki vochaam so ee kubernetes ki kooda manam inform cheyaali kadha docker images ni 
+	elaa run cheyaali anedhi, so kubernetes ki kooda inform cheyaali that is again just docker compose.yaml file laaga idhi manifest.yaml file 
 
 --> kubectl command line is used for taking the manifest.yaml and pushed to EKS cluster ( manifest.yaml file ni kubectl execute chestundhanna maata )
---> eksctl, EKS cluster create cheyadaaniki and kubectl, EKS cluster to interact avvadaaniki anna maata
---> for authentication aws lo eks cluster create cheyalantey authentication avasaram dhaani kosam manaki aws command line or IAM roles means aws configure ani ichinapudu details istaamu eksctl use chesetapudu adhi aws configure nunchi authenticate ayi EKS cluster ni create chestundhi and same for kubectl as well
+--> eksctl anedhi EKS cluster create cheyadaaniki and kubectl anedhi EKS cluster to interact avvadaaniki anna maata
+--> for authentication aws lo eks cluster create cheyalantey authentication avasaram dhaani kosam manaki aws command line or IAM roles means aws configure ani 
+	ichinapudu details istaamu eksctl use chesetapudu adhi aws configure nunchi authenticate ayi EKS cluster ni create chestundhi and same for kubectl as well
 
 1. create one linux server as workstation
 2. install docker to build images
@@ -35,14 +39,14 @@ https://github.com/DAWS-82S/docker/blob/main/eks.yaml
 ondemand, spot and reserved instances
 ondemand --> creating server on the spot, high cost
 reserved --> cost is less because you are reserving for longterm
-SPOT instances --> 70-90% discount hardware available now...when our customers require we will take back your hardware with 2min notice. ( testing and dev we are running not fit for production) manam practice ki idhi vaadutaam ikkada aws, instance ni laagesukunna kooda kubernetes anedhi managed node lo edyna instance aws laagesukunnapudu aa server loni containers ni verey server ki shift chestundhi so no problem for practice
+SPOT instances --> 70-90% discount hardware available now...when our AWS customers require we will take back your hardware with 2min notice. ( testing and dev we are running not fit for production) manam practice ki idhi vaadutaam ikkada aws, instance ni laagesukunna kooda kubernetes anedhi managed node lo edyna instance aws laagesukunnapudu aa server loni containers ni verey server ki shift chestundhi so no problem for practice
 
 -->	aws configure
 	create cluster
 
 	eksctl create cluster --config-file=eks.yaml ( dheenni manam future lo terraform loki teesukostaam  means EKS cluster ni terraform to create chestaam)
 	
-	cloud formation (just like terraform ) anedhi vundhi aws lo idhi aws native service dheeni dwaara mottam resources ( like dedicated VPC kaani NAT, routces etc ) ni create chestundhi aws lo (background lo) pyna command apply chesinapudu ( it is usually takes 15 min )
+	cloud formation (just like terraform ) anedhi vundhi aws lo idhi aws native service dheeni dwaara mottam resources ( like dedicated VPC kaani NAT, routes etc ) ni create chestundhi aws lo (background lo) pyna command apply chesinapudu ( it is usually takes 15 min )
 	
 	cluster (control machine ) create ayina taruvata
 
@@ -54,7 +58,7 @@ everything in kubernetes is called as resource/object
 --> oka kubernetes cluster lo manam multiple projects chesukovachu endhukantey kubernetes is heavy this is not simple thing ( multiple projects in the sense in 
 	HDFC multiple projects are there just like internet banking, mobile, whatsapp, loans, cards etc )
 	okkokka component okkokka cluster ni chesukuntu vellaledhu oka group of project vochesi oka cluster ni tessukuntaayi juste like saving bank teesukuntey dhaanilo frontend, backend contanins lot of componenets , databses, SMS, whatsapp lu vuntaayi ( savings ( frontend, backend lot of components, db etc ki oka cluster and loans ki kooda same one cluster alaaga anna maata
-	so atlease okkokka group of banking okkokka cluster ni teesukuntaayi 
+	so atleast okkokka group of banking okkokka cluster ni teesukuntaayi 
 	so andhukani ee kubernetes cluster anna taruvata multiple projects vuntaayi ,
 	multiple projects vunnapudu aws lo em use chesi isolation chestaamu antey , VPC is used for isolation
 	but ikkada cluster mottam oka entire space anukuntey indhulo ee kubernetes cluster lo manaki namespace anedhi vuntundhi, one project for one namespace ( expense ) another project for another namespace (roboshop)
@@ -90,7 +94,7 @@ spec: ( RAM, CPU, Harddisk etc )
 
 	If you're deploying your expense management application, this namespace can isolate all related pods, services, and deployments under expense for better management and security.
 
-	pushing this manifest files to github and clone to the linux server and kubectl dwaara apply cheyyali manifesi files ni so that resources apply avutaayi
+	pushing this manifest files to github and clone to the linux server and kubectl dwaara apply cheyyali manifest files ni so that resources apply avutaayi
 	
 	kubectl create -f 01-namespace.yaml   ( namespace created)
 	
@@ -120,6 +124,9 @@ k8 --> image --> pod
 	follow same steps above 01-namespace.yaml ( but ikkada manam name space specify cheyatledhu so idhi default name space lo create ayi vuntundhi)
 	
 	kubectl exec -it nginx -- bash  ( login to nginx means inside that nginx pod)
+	kubectl get pods --all-namespaces
+	kubectl exec -it nginx --namespace=expense -- bash ( By default, kubectl operates in the default namespace. If your pod is in a different namespace, )
+
 	
 	kubectl delete -f 02-pod.yaml
 	
