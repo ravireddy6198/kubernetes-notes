@@ -19,7 +19,7 @@ LoadBalancer > NodePort > ClusterIP
 	nodeport or loadBalancer , if we use nodeport kubernetes opens that the specific port on each and every workernode , so oka pod inkoka pod tho connect avvalantey actual ga IPaddress kaavalsi vostundhi IP address anedhi temporary kaabatti kubernetes and container lo we are attaching pods with the services ikkada service anedhi DNS laaga kooda use avutundhi, so we can say 3 uses for service, LBing and then pod to pod communication , DNS 
 	so nodeport vochinapudu request anyserverIp:nodeport --> clusterIP --> pod
 	
-	services pods nielaa select chesukuntaayi ante, here labels are used as selectors
+	services pods ni elaa select chesukuntaayi ante, here labels are used as selectors
 	
 	
 --> so ipudu naaku vochey traffic ki oka pod saripodhu, i want to make multiple pods how can i do that ?
